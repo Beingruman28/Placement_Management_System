@@ -1,19 +1,27 @@
 package com.cg.placement.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="placement")
-public class Placement {
+public class Placement  implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int p_id;
 	private String s_name;
-	private String college;
 	private String date;
 	private String qualification;
 	private int year;
+	
+	@ManyToOne							//Association M:1
+	@JoinColumn(name="c_id")
+	private College college;
 	
 	public int getP_id() {
 		return p_id;
@@ -40,10 +48,10 @@ public class Placement {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public String getCollege() {
+	public College getCollege() {
 		return college;
 	}
-	public void setCollege(String college) {
+	public void setCollege(College college) {
 		this.college = college;
 	}
 	public String getDate() {
